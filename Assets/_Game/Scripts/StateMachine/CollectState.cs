@@ -19,6 +19,5 @@ public class CollectState : IState<Enemy>
     }
     public void OnExit(Enemy eneny)
     {
-
     }
 }

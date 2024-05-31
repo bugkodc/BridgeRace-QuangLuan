@@ -13,8 +13,6 @@ public class CameraFollow : MonoBehaviour
         player = FindObjectOfType<Player>();
         transformCamera= gameObject.transform;
     }
-
-    // Update is called once per frame
     private void FixedUpdate()
     {
         if(!GameManagerr.Instance.IsState(EGameState.Finish))
@@ -22,13 +20,15 @@ public class CameraFollow : MonoBehaviour
             Follow();
         }
     }
+    //TODO: Camere Follow player
     private void Follow()
     {
         Vector3 pos = transformCamera.position;
         Vector3 targetPos = player.TF.position + offset;
-        pos = Vector3.Lerp(pos, targetPos, lerpRate*Time.deltaTime);
+        pos = Vector3.Lerp(pos, targetPos, lerpRate * Time.deltaTime);
         transformCamera.position = pos;
     }
+    //TODO: Camere khi EndGame
     public void FollowEndGame(Vector3 position)
     {
         Vector3 pos = transformCamera.position;

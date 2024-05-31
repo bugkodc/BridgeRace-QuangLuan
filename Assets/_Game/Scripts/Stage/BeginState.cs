@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,7 @@ public class BeginState : MonoBehaviour
 {
     [SerializeField] private Stage stage;
     private List<Character> listChar = new List<Character>();
+    //TODO: Xử lý các hành động khác khi character vào stage
     private void OnTriggerEnter(Collider other)
     {
         Character character = Cache.GetCharacter(other);
@@ -18,6 +19,7 @@ public class BeginState : MonoBehaviour
             character.isNewState = true;
         }
     }
+    //TODO:xử lý khi character rời khỏi stage
     private void OnTriggerExit(Collider other)
     {
         Character character = Cache.GetCharacter(other);
