@@ -4,7 +4,7 @@ public class Enemy : Character
 {
     [SerializeField] private float minNumberTarget = 4;
     [SerializeField] private float maxNumberTarget = 10;
-    [SerializeField] private float moveSpeed = 5;
+    [SerializeField] private float moveSpeed = 7;
     private IState<Enemy> currentState;
     private int randBridge;
     public NavMeshAgent agent;

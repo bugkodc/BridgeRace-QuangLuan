@@ -6,8 +6,8 @@ public class Stage : MonoBehaviour
 {
     [SerializeField] private Brick birckPrefab;
     [SerializeField] private GameObject ground;
-    [SerializeField] private float minNumberBrick=10;
-    [SerializeField] private float maxNumberBrick=15;
+    [SerializeField] private float minNumberBrick= 10;
+    [SerializeField] private float maxNumberBrick= 15;
     [SerializeField] private GameObject listBrick;
     [SerializeField] private Brick ColBrickPrefab;
     private float wGround;
