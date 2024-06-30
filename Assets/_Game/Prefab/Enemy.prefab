@@ -170,9 +170,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d2c778ecc050a624b9a269241a147e2f, type: 2}
   - {fileID: 11400000, guid: 3da1d1d9ce04a2243bfe7b758257f0d0, type: 2}
   go: {fileID: 2359406316382165110}
-  colorType: 5
   meshRenderer: {fileID: 2359406315650692316}
   skinnedMeshRenderer: {fileID: 5561464505358525497}
+  colorType: 5
   brickHolder: {fileID: 1098011665315411552}
   chaBrick: {fileID: 8678880722584026926, guid: faa8837231fe7dc42acaddf4a9a1a656, type: 3}
   nextPoint: {fileID: 5283180928911783240}
@@ -188,6 +188,7 @@ MonoBehaviour:
   isNewState: 0
   minNumberTarget: 4
   maxNumberTarget: 10
+  moveSpeed: 7
   agent: {fileID: 1762532430662617568}
   haveBrick: 0
   numberTarget: 0
