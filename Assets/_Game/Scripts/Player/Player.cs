@@ -7,36 +7,37 @@ public class Player : Character
 
     [SerializeField] private Rigidbody rbPlayer;
 
-    private void Start() 
+    private void Start()
     {
         OnInit();
     }
-   
-    private void Update()
+
+    private void Update()// fix late
     {
-        if(currentLevel!= null)
+        if (currentLevel == null) return;
+        if (!CheckStair() || (!JoystickInput.Instance.isControl && !GameManagerr.Instance.IsState(EGameState.Finish))) //Len cau gach khong cung mau, (khong di chuyen va game chua finish)
         {
-            if(!CheckStair() || (!JoystickInput.Instance.isControl && !GameManagerr.Instance.IsState(EGameState.Finish))) //Len cau gach khong cung mau, (khong di chuyen va game chua finish)
-            {
-                rbPlayer.velocity= Vector3.zero;
-                ChangeAnim(Constant.ANIM_IDLE);
-            }
-            else if(GameManagerr.Instance.IsState(EGameState.Finish))
-            {
-                ChangeAnim(Constant.ANIM_WIN);
-                rbPlayer.velocity= Vector3.zero;
-            }
-            else
-            {
-                JoystickInput.Instance.Move();
-                ChangeAnim(Constant.ANIM_RUN);
-            }
+            rbPlayer.velocity = Vector3.zero;
+            ChangeAnim(Constant.ANIM_IDLE);
         }
+        else if (GameManagerr.Instance.IsState(EGameState.Finish))
+        {
+            ChangeAnim(Constant.ANIM_WIN);
+            rbPlayer.velocity = Vector3.zero;
+        }
+        else
+        {
+            JoystickInput.Instance.Move();
+            ChangeAnim(Constant.ANIM_RUN);
+        }
+
     }
-    public void OnInit() 
+    public override void OnInit()
     {
+        base.OnInit();
         ChangeAnim(Constant.ANIM_IDLE);
-        rbPlayer.velocity= Vector3.down*100;
-        InitPool(); 
+        rbPlayer.velocity = Vector3.down * 100;
+        InitPool();
     }
+
 }

@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aecbb8668cf5b1440be4eaed486ff8d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   levels:
   - {fileID: 732489979, guid: 03b3058b630878b49887708b1309fb61, type: 3}
   - {fileID: 732489979, guid: c72afd7b01e8e7a4cad0cb61a0f11455, type: 3}
@@ -765,6 +766,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2779078844880266122, guid: 9e592dee2ae67684fb1d581bbd252d6a, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2779078844880266122, guid: 9e592dee2ae67684fb1d581bbd252d6a, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2779078844880266135, guid: 9e592dee2ae67684fb1d581bbd252d6a, type: 3}

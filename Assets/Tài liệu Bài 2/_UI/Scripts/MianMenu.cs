@@ -7,7 +7,7 @@ public class MianMenu : UICanvas
     public Text level;
     private void Update()
     {
-        level.text= "Level: "+ Data.Instance.GetLevel().ToString();
+        level.text = "Level: " + Data.Instance.GetLevel().ToString();
     }
     public void PlayButton()
     {
@@ -19,3 +19,4 @@ public class MianMenu : UICanvas
         Close();
     }
 }
+

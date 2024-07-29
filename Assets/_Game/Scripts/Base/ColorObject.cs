@@ -11,9 +11,9 @@ public class ColorObject : GameUnit
     public SkinnedMeshRenderer skinnedMeshRenderer;
     public EColorType colorType;
 
-     public override void OnInit()
+    public override void OnInit()
     {
-        
+
     }
     public override void OnDespawn()
     {
@@ -21,20 +21,20 @@ public class ColorObject : GameUnit
     }
     public void SetColor(EColorType eColorType)
     {
-       foreach(ColorData data in listColorData)
-       {
-        if(data.eColorType == eColorType &&  this.meshRenderer!= null )
-        {   
-            this.meshRenderer.material = data.material;
-            this.colorType = data.eColorType;
-        }
-        if(data.eColorType == eColorType &&  this.skinnedMeshRenderer!= null )
-        {   
-            this.skinnedMeshRenderer.material = data.material;
-            this.colorType = data.eColorType;
-        }
+        foreach (ColorData data in listColorData)
+        {
+            if (data.eColorType == eColorType && this.meshRenderer != null)
+            {
+                this.meshRenderer.material = data.material;
+                this.colorType = data.eColorType;
+            }
+            if (data.eColorType == eColorType && this.skinnedMeshRenderer != null)
+            {
+                this.skinnedMeshRenderer.material = data.material;
+                this.colorType = data.eColorType;
+            }
 
-       } 
+        }
     }
 
     public EColorType GetColor()
@@ -44,7 +44,7 @@ public class ColorObject : GameUnit
 
     public GameObject GetObjectByColor(EColorType eColorType)
     {
-        if(this.colorType == eColorType)
+        if (this.colorType == eColorType)
         {
             return go;
         }
