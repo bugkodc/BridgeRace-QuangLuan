@@ -5,23 +5,31 @@ using UnityEngine;
 public class GamePlayUI : UICanvas
 {
     [SerializeField] GameObject settingBtn;
-    private void Update()
+    private void Update() // fix late
     {
-        if(GameManagerr.Instance.IsState(EGameState.Finish))
+        CheckGameStateFinish();
+
+        CheckGameStatePlay();
+    }
+    public void CheckGameStateFinish()
+    {
+        if (GameManagerr.Instance.IsState(EGameState.Finish))
         {
             Hide();
         }
-
-        if(GameManagerr.Instance.IsState(EGameState.GamePlay))
+    }
+    public void CheckGameStatePlay()
+    {
+        if (GameManagerr.Instance.IsState(EGameState.GamePlay))
         {
             Show();
         }
     }
     public void SettingBtn()
     {
-     GameManagerr.Instance.ChangeState(EGameState.Pause);
-     UIManager.Instance.OpenUI<Setting>();
-     Close();   
+        GameManagerr.Instance.ChangeState(EGameState.Pause);
+        UIManager.Instance.OpenUI<Setting>();
+        Close();
     }
 
     public void Hide()

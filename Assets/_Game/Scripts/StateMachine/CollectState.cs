@@ -8,9 +8,9 @@ public class CollectState : IState<Enemy>
 
     public void OnExecute(Enemy enemy)
     {
-        if(!enemy.haveBrick)
+        if (!enemy.haveBrick)
         {
-            enemy.ChangeState(new MoveToBridgeState() );
+            enemy.ChangeState(new MoveToBridgeState());
         }
         else
         {

@@ -11,38 +11,32 @@ public class FinishPoint : MonoBehaviour
     public CameraFollow cameraFollow;
     private void Awake()
     {
-        transformFinishPoint= gameObject.transform;
-    }
-
-    private void Start()
-    {
-        cameraFollow= FindObjectOfType<CameraFollow>();
-        
+        transformFinishPoint = gameObject.transform;
+        cameraFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();// fix late
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(currentLevel!=null)
+        if (currentLevel == null) return;
+        cameraFollow.FollowEndGame(transformFinishPoint.position);
+        Character character = other.GetComponent<Character>();
+        CheckCharacter(character);
+    }
+    public void CheckCharacter(Character character)
+    {
+        if (character == null) return;
+        character.ClearCharBrick();
+        character.ChangeAnim(Constant.ANIM_WIN);
+        Type playerType = (new Player()).GetType();
+        Type characterType = character.GetType();
+        if (characterType.IsAssignableFrom(playerType)) // ep kieu character => player
         {
-            cameraFollow.FollowEndGame(transformFinishPoint.position);
-            Character character = other.GetComponent<Character>();
-            if(character != null)
-            {
-                character.ClearCharBrick();
-                character.ChangeAnim(Constant.ANIM_WIN);
-                Type playerType = (new Player()).GetType();
-                Type characterType = character.GetType();
-                if(characterType.IsAssignableFrom(playerType))
-                {
-                    currentLevel.isWin = true;
-  
-                }
-                else
-                {
-                    currentLevel.isWin = false;
-                }
-                
-                LevelManager.Instance.OnFinish();
-            }
-        }  
+            currentLevel.isWin = true;
+
+        }
+        else
+        {
+            currentLevel.isWin = false;
+        }
+        LevelManager.Instance.OnFinish();
     }
 }

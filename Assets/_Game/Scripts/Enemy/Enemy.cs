@@ -12,28 +12,29 @@ public class Enemy : Character
     public bool haveBrick;
     public float numberTarget;
 
-    void Start() {
+    void Start()
+    {
         OnInit();
     }
-    private void Update()
+    private void Update() // late fix
     {
-        if(GameManagerr.Instance.IsState(EGameState.GamePlay))
+        if (GameManagerr.Instance.IsState(EGameState.GamePlay))
         {
             ChangeAnim(Constant.ANIM_RUN);
-            if(currentState!= null)
+            if (currentState != null)
             {
                 currentState.OnExecute(this);
             }
             agent.speed = moveSpeed;
         }
-        if(GameManagerr.Instance.IsState(EGameState.Finish)  )
+        if (GameManagerr.Instance.IsState(EGameState.Finish))
         {
             agent.speed = 0;
-            
+
         }
-        if(GameManagerr.Instance.IsState(EGameState.Pause))
+        if (GameManagerr.Instance.IsState(EGameState.Pause))
         {
-            agent.speed =0;
+            agent.speed = 0;
             ChangeAnim(Constant.ANIM_IDLE);
         }
 
@@ -42,15 +43,15 @@ public class Enemy : Character
     {
         ChangeAnim(Constant.ANIM_IDLE);
         InitPool();
-        agent.speed =5;
+        agent.speed = 5;
     }
     public void OnStart()
     {
-        if(currentState== null)
+        if (currentState == null)
         {
             // ChangeAnim(Constant.ANIM_RUN);
             ChangeState(new CollectState());
-            
+
         }
         // ChangeAnim(Constant.ANIM_RUN);
     }
@@ -58,13 +59,13 @@ public class Enemy : Character
     //Get target position
     public Vector3 GetTargetPostion()
     {
-        if(currentStage!= null)
+        if (currentStage != null)
         {
-            for (int i =0; i<currentStage.bricks.Count; i++)
+            for (int i = 0; i < currentStage.bricks.Count; i++)
             {
-                if(currentStage.bricks[i].colorType == colorType)
+                if (currentStage.bricks[i].colorType == colorType)
                 {
-                    haveBrick =true;
+                    haveBrick = true;
                     return currentStage.bricks[i].TF.position;
                 }
             }
@@ -72,11 +73,11 @@ public class Enemy : Character
         haveBrick = false;
         return Vector3.zero;
     }
-    
+
     //Move to target position
     public void SetDestination(Vector3 position)
     {
-        
+
         agent.SetDestination(position);
     }
     //Collection brick
@@ -84,28 +85,28 @@ public class Enemy : Character
     {
         // ChangeAnim(Constant.ANIM_RUN);
         numberTarget = Random.Range(minNumberTarget, maxNumberTarget);
-        if( numberBrick < numberTarget)
+        if (numberBrick < numberTarget)
         {
             Vector3 target = GetTargetPostion();
-            if(haveBrick)
+            if (haveBrick)
             {
                 SetDestination(target);
             }
             else
-            { 
+            {
                 ChangeState(new MoveToBridgeState());
             }
         }
         else
         {
             ChangeState(new MoveToBridgeState());
-        }  
+        }
     }
     //Move to Bridge
     public void MoveToBrigde()
     {
         // ChangeAnim(Constant.ANIM_RUN);
-        if(currentStage!=null && CheckStair())
+        if (currentStage != null && CheckStair())
         {
             randBridge = Random.Range(0, currentStage.listBridge.Count);
             Vector3 nextNewStage = currentStage.listBridge[randBridge].nextNewStage.position;
@@ -114,17 +115,18 @@ public class Enemy : Character
         else
         {
             ChangeState(new CollectState());
-        } 
+        }
     }
     //Change State
-    public void ChangeState(IState<Enemy> state) {
+    public void ChangeState(IState<Enemy> state)
+    {
         {
-            if(currentState!= null)
+            if (currentState != null)
             {
                 currentState.OnExit(this);
             }
             currentState = state;
-            if(currentStage!= null)
+            if (currentStage != null)
             {
                 currentState.OnEnter(this);
             }

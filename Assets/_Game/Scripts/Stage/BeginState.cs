@@ -10,7 +10,7 @@ public class BeginState : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Character character = Cache.GetCharacter(other);
-        if(character!= null && !listChar.Contains(character))
+        if (character != null && !listChar.Contains(character))
         {
             listChar.Add(character);
             character.currentStage = stage;
@@ -23,7 +23,7 @@ public class BeginState : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         Character character = Cache.GetCharacter(other);
-        if(character!= null)
+        if (character != null)
         {
             character.isNewState = false;
         }

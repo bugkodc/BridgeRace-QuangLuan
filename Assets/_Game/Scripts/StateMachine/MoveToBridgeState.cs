@@ -10,14 +10,14 @@ public class MoveToBridgeState : IState<Enemy>
     }
     public void OnExecute(Enemy enemy)
     {
-       if( enemy.numberBrick==0 || enemy.isNewState)
-       {
-        enemy.ChangeState(new CollectState());
-       }
-       else
-       {
-        enemy.MoveToBrigde();
-       }
+        if (enemy.numberBrick == 0 || enemy.isNewState)
+        {
+            enemy.ChangeState(new CollectState());
+        }
+        else
+        {
+            enemy.MoveToBrigde();
+        }
     }
     public void OnExit(Enemy enemy)
     {

@@ -10,15 +10,13 @@ public class CameraFollow : MonoBehaviour
     public float lerpRate;
     private void Awake()
     {
-        player = FindObjectOfType<Player>();
-        transformCamera= gameObject.transform;
+        player = LevelManager.Instance.player; // late fix
+        transformCamera = gameObject.transform;
     }
     private void FixedUpdate()
     {
-        if(!GameManagerr.Instance.IsState(EGameState.Finish))
-        {
-            Follow();
-        }
+        if (GameManagerr.Instance.IsState(EGameState.Finish)) return;
+        Follow();
     }
     //TODO: Camere Follow player
     private void Follow()

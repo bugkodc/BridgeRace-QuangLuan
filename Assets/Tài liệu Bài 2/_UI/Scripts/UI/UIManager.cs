@@ -91,7 +91,8 @@ public class UIManager : Singleton<UIManager>
 
     private Dictionary<UICanvas, UnityAction> BackActionEvents = new Dictionary<UICanvas, UnityAction>();
     private List<UICanvas> backCanvas = new List<UICanvas>();
-    UICanvas BackTopUI {
+    UICanvas BackTopUI
+    {
         get
         {
             UICanvas canvas = null;

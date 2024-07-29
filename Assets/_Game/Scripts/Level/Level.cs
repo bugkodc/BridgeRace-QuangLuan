@@ -19,12 +19,12 @@ public class Level : MonoBehaviour
 
     public int numberEnemy;
     private List<Enemy> listEnemy = new List<Enemy>();
-    
-    void Awake()
-    { 
-        player = FindObjectOfType<Player>();
+
+    void Awake() // fix late
+    {
+        player = LevelManager.Instance.player;
         rbPlayer = player.gameObject.GetComponent<Rigidbody>();
-        cameraFollow = FindObjectOfType<CameraFollow>();
+        cameraFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
         TF = gameObject.transform;
         StartPointTF = StartPoint.transform;
 
@@ -34,7 +34,7 @@ public class Level : MonoBehaviour
     public void OnInit()
     {
         this.Despawn();
-        foreach( Stage stage in stages)
+        foreach (Stage stage in stages)
         {
             stage.OnInit();
         }
@@ -46,7 +46,7 @@ public class Level : MonoBehaviour
 
     public void OnStart()
     {
-        foreach(Enemy enemy in listEnemy)
+        foreach (Enemy enemy in listEnemy)
         {
             enemy.OnStart();
         }
@@ -56,11 +56,11 @@ public class Level : MonoBehaviour
 
     public void Despawn()
     {
-        foreach(Stage stage in stages)
+        foreach (Stage stage in stages)
         {
             stage.OnDespawn();
         }
-        foreach(Enemy enemy in listEnemy)
+        foreach (Enemy enemy in listEnemy)
         {
             enemy.ClearCharBrick();
             enemy.OnDespawn();
@@ -71,36 +71,36 @@ public class Level : MonoBehaviour
     }
     private void GetListColor()
     {
-        for(int i =0; i< numberEnemy+1; i++)
+        for (int i = 0; i < numberEnemy + 1; i++)
         {
-            listColor.Add((EColorType) i);
+            listColor.Add((EColorType)i);
         }
     }
 
     private void GenListPoint()
     {
         float wGround = StartPointTF.localScale.x;
-        Vector3 position= StartPointTF.position;
-        for(int i =0; i< numberEnemy+1; i++)
+        Vector3 position = StartPointTF.position;
+        for (int i = 0; i < numberEnemy + 1; i++)
         {
-            position.x = StartPointTF.position.x -wGround/2+ (wGround/numberEnemy)*(i)+2f;
-            position.y = StartPointTF.position.y +1.5f;
+            position.x = StartPointTF.position.x - wGround / 2 + (wGround / numberEnemy) * (i) + 2f;
+            position.y = StartPointTF.position.y + 1.5f;
             listPoint.Add(position);
         }
     }
 
     private void GenCharacter()
     {
-        int index = Random.Range(0, numberEnemy+1);
+        int index = Random.Range(0, numberEnemy + 1);
         player.SetColor(listColor[index]);
         player.TF.position = listPoint[index];
         player.OnInit();
-        rbPlayer.isKinematic=false;
+        rbPlayer.isKinematic = false;
         listColor.RemoveAt(index);
         listPoint.RemoveAt(index);
-        for(int i =0; i< listColor.Count; i++)
+        for (int i = 0; i < listColor.Count; i++)
         {
-            Enemy enemy = SimplePool.Spawn<Enemy>(PoolType.Enemy, listPoint[i], Quaternion.identity );
+            Enemy enemy = SimplePool.Spawn<Enemy>(PoolType.Enemy, listPoint[i], Quaternion.identity);
             listEnemy.Add(enemy);
             enemy.OnInit();
             listEnemy.Add(enemy);
@@ -108,5 +108,5 @@ public class Level : MonoBehaviour
         }
     }
 
-    
+
 }
